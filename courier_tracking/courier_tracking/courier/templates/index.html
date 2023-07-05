@@ -1,0 +1,48 @@
+{% include 'navigation.html' %}
+{% load static %}
+<style>
+    .box{
+
+    width:900px;
+    height:400px;
+    float:left;
+    background-image:url({% static 'images/cr3.jpg' %});
+    background-size:100% 100%;
+    }
+    .box2{
+    width:400px;
+    height:400px;
+    float:right;
+    background:#888;
+    border-radius:30px;
+    }
+    .set1{
+			position: relative;
+			display: inline-block;
+			color: yellow;
+			margin:23% 32%;
+			padding: 15px 20px;
+			text-decoration: none;
+			font-size: 40px;
+			font-weight:bold;
+			transition: 0.2s;
+		}
+		.set1:hover{
+			color:yellow;
+			font-weight: bold;
+			border-radius: 10px;
+			background:#2196f3;
+			box-shadow: 0 0 20px cyan,0 0 40px cyan,0 0 80px cyan;
+
+		}
+</style>
+<div class="box">
+</div>
+<div class="box2">
+    <a href="{% url 'visitor_track' %}" class="set1"> Track Your Parcel</a>
+
+</div>
+
+<div style="clear:both;">
+{% include 'footer.html' %}
+</div>

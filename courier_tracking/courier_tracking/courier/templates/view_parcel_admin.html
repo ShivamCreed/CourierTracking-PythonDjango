@@ -1,0 +1,60 @@
+{% include 'admin_navigation.html' %}
+
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    All Parcel Request
+</marquee>
+<hr>
+
+<div class="container-fluid">
+<table class="table table-hover " id="example">
+    <thead>
+    <tr style="background-color: lightgreen; color : black">
+        <th>Full Name</th>
+        <th>Email ID</th>
+        <th>Contact</th>
+        <th>Parcel Type</th>
+        <th>Parcel Weight</th>
+        <th>Id Proof</th>
+        <th style="text-align:center;">Change Status</th>
+    </tr>
+    </thead>
+    <tbody style="background-color:lightblue; color: black">
+    {% for i in data %}
+    <tr>
+        <td>{{i.first_name}} {{i.last_name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.parcel_type}}</td>
+        <td align="center">{{i.weight}}KG</td>
+        <td>{{i.gov_id}}<br>{{i.gov_no}}</td>
+        <td style="padding-right:0px;" align="right">
+            {% ifequal i.status "Pending" %}
+            <a href="{% url 'change_status' i.id %}" class="btn btn-secondary">{{i.status}}</a>
+            {% endifequal %}
+            {% ifequal i.status "Confirm" %}
+            <a href="{% url 'change_status' i.id %}" class="btn btn-success">{{i.status}}</a>
+            {% endifequal %}
+            {% ifequal i.status "Canceled" %}
+        <a href="{% url 'change_status' i.id %}" class="btn btn-secondary">{{i.status}}</a>
+        {% endifequal %}
+
+         {% for j in data2%}
+            {% ifequal i.parcel_id j.parcel_id %}
+               {% ifequal j.parcel_status "Delivered"%}
+                 <a href="" class="btn btn-primary">Delivered Successfully</a>
+                {% endifequal %}
+                {% ifnotequal j.parcel_status "Delivered"%}
+                <a href="{% url 'change_track_status' i.parcel_id %}" class="btn btn-danger">Change Track Status</a></td>
+                {% endifnotequal %}
+            {% endifequal %}
+         {% endfor %}
+
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+{% include 'footer.html' %}
